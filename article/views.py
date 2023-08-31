@@ -115,6 +115,7 @@ def article_update(request , id):
     if request.method == "POST":
         article_post_form = ArticleForm(data=request.POST)
         if article_post_form.is_valid():
+            #article = article_post_form.save( commit= False)
             article.title = request.POST['title']
             article.body = request.POST['body']
             article.save()
@@ -124,9 +125,13 @@ def article_update(request , id):
             return HttpResponse("表单内容有误，请重新填写")
 
     else:
-        article_post_form = ArticleForm()
+
+        article_post_form = ArticleForm(initial={
+            'title' : article.title,
+            'body' : article.body,
+        })
         context = {
-            "article":article,
+            #"article":article,
             "article_post_form":article_post_form
         }
         return render( request , "article/update.html" , context)
