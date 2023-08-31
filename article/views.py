@@ -1,3 +1,4 @@
+import markdown
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import HttpResponse,Http404
@@ -57,9 +58,16 @@ def article_details(request , id):
     article.save(update_fields=['views'])     # update_fields=[]指定了数据库只更新total_views字段，优化执行效率
 
     comments = Comment.objects.filter(article = id)
+    article.body = markdown.markdown(article.body, extensions=[
+        'markdown.extensions.extra',
+        'markdown.extensions.codehilite',
+        'markdown.extensions.toc',
+    ])
+
+
     context = {
         "article" : article,
-        "comments" : comments
+        "comments" : comments,
     }
     return render(request , "article/detail.html" , context)
 

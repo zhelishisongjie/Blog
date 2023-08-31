@@ -10,6 +10,8 @@
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
 {#<div class="row">#}
+
+
 <!-- 定义放置文章标题的div容器 -->
  <br>
 <div class="container">
@@ -41,7 +43,6 @@
             </form>
         </div>
     </div>
-
     <!-- 新增，搜索提示语 -->
     {% if search %}
         {% if articles %}
@@ -52,6 +53,9 @@
             <hr>
         {% endif %}
     {% endif %}
+
+
+
     {% for article in articles %}
     <div class="row mt-2">
         <!-- 文章内容 -->
@@ -78,6 +82,8 @@
     </div>
     {% endfor %}
     <br>
+
+
 <!-- 页码导航 -->
 <div class="pagination row">
     <div class="m-auto">

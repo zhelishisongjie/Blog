@@ -23,9 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-qo3m#mecusp!yz$5dwjtr%^g)s!l469vt+0d2i*v843=5vmx&f"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+# DEBUG = False
+# ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     "userprofile",
     "comment",
     'corsheaders',  #解决浏览器跨域问题
+    "mdeditor",
 ]
 
 MIDDLEWARE = [
@@ -143,3 +145,48 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+
+
+
+
+
+# 设置框架 django-mdeditor（django3.0+需要设置）
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+# 添加MEDIA的相关配置 图片相关文件会在uploads/editor目录下
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/media/'
+
+# django-mdeditor 设置
+MDEDITOR_CONFIGS = {
+    'default': {
+        'width': '90%',  # Custom edit box width
+        'height': 500,  # Custom edit box height
+        'toolbar': ["undo", "redo", "|",
+                    "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|",
+                    "h1", "h2", "h3", "h5", "h6", "|",
+                    "list-ul", "list-ol", "hr", "|",
+                    "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime",
+                    "emoji", "html-entities", "pagebreak", "goto-line", "|",
+                    "help", "info",
+                    "||", "preview", "watch", "fullscreen"],  # custom edit box toolbar
+        'upload_image_formats': ["jpg", "jpeg", "gif", "png", "bmp", "webp"],  # image upload format type
+        'image_folder': 'editor',  # 图片保存路径
+        'theme': 'dark',  # 工具栏显示主题, dark / default
+        'preview_theme': 'default',  # 预览区显示主题, dark / default
+        'editor_theme': 'default',  # 编辑区显示主题, pastel-on-dark / default
+        'toolbar_autofixed': True,  # 工具栏是否固定在顶部
+        'search_replace': True,  # 是否打开搜索替换
+        'emoji': True,  # 是否打开表情显示
+        'tex': True,  # 是否打开 tex 图表显示
+        'flow_chart': True,  # 是否打开流程图显示
+        'sequence': True,  # 是否打开时序图显示
+        'watch': True,  # 实时预览
+        'lineWrapping': True,  # 是否换行
+        'lineNumbers': True,  # 是否显示行数
+        'language': 'zh'  # 语言
+    }
+
+}

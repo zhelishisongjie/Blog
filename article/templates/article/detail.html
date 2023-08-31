@@ -46,12 +46,16 @@
                 </small>
 
             </div>
+
+
         </div>
         <!-- 文章正文 -->
         <div class="col-12">
-            <p>{{ article.body }}</p>
+            <p>{{ article.body|safe }}</p>
         </div>
         <!--    </div>-->
+
+
     <div class="container">
     <div class="col-12">
         <!-- 发表评论 -->
